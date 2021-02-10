@@ -1,25 +1,89 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import creatures from './data.js';
+import ImageList from './MyImageList/ImageList.js';
+import Header from './MyHeader/Header.js';
+import './index.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends React.Component {
+  state = {
+    url: '',
+    title: '',
+    description: '',
+    keyword: '',
+    horns: '',
+  }
+
+  render() {
+    const creatureOptions = creatures.map(
+      creature =>
+        <option key={creature.name} value={creature.keyword}>{creature.keyword}</option>
+    )
+
+    const filteredCreatures = creatures.filter((creature) => {
+      if (!this.state.keyword && !this.state.horns) return true;
+
+      if (creature.horns === Number(this.state.horns)) return true;
+
+      if (creature.keyword === this.state.keyword) return true;
+
+      return false;
+    });
+
+    return (
+      <main>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Hanalei&display=swap');
+</style>
+        <Header />
+        <section className='border'>
+          <section className='colorful-backdrop'>
+            <section className='form'>
+              <form>
+                <div>
+                  <h2>Creature</h2>
+                  <select
+                    value={this.state.keyword}
+                    onChange={(e) => {
+                      this.setState({
+                        keyword: e.target.value
+                      })
+                    }}
+                  >
+                    {creatureOptions}
+                  </select>
+                </div>
+                <div>
+                  <h2>Horns</h2>
+                  <select
+                    value={this.state.horns}
+                    onChange={(e) => {
+                      this.setState({
+                        horns: e.target.value
+                      })
+                    }}
+                  >
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='100'>100</option>
+                  </select>
+                </div>
+              </form>
+            </section>
+            <section className='key'>
+              <h3 className='return-creature'>
+                Creature: {this.state.keyword}
+              </h3>
+              <h3 className='return-horns'>
+                Horns: {this.state.horns}
+              </h3>
+            </section>
+            <ImageList creatures={filteredCreatures} />
+          </section>
+        </section>
+      </main>
+    )
+  }
 }
 
-export default App;
