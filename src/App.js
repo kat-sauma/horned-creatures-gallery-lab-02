@@ -14,20 +14,45 @@ export default class App extends React.Component {
     horns: '',
   }
 
+  handleKeywordChange = (e) => {
+    this.setState({
+      creature: e.target.value
+    })
+  }
+  handleHornsChange = (e) => {
+    this.setState({
+      horns: Number(e.target.value)
+    })
+  }
+
   render() {
+    console.log(this.state)
     const creatureOptions = creatures.map(
       creature =>
-        <option key={creature.name} value={creature.keyword}>{creature.keyword}</option>
+        <option key={creature.title} value={creature.keyword}>{creature.keyword}</option>
     )
 
     const filteredCreatures = creatures.filter((creature) => {
       if (!this.state.keyword && !this.state.horns) return true;
 
-      if (creature.horns === Number(this.state.horns)) return true;
+      if (this.state.keyword && !this.state.horns) {
+        if (creature.keyword === this.state.keyword) return true;
+      }
 
-      if (creature.keyword === this.state.keyword) return true;
+      if (Number(this.state.horns) && !this.state.keyword) {
+        if (Number(creature.horns) === Number(this.state.horns)) return true;
+      }
+
+      if (Number(this.state.horns) && this.state.keyword) {
+        if (Number(creature.horns) === Number(this.state.horns) && creature.keyword === this.state.keyword) return true;
+      }
 
       return false;
+      // if (creature.horns === Number(this.state.horns)) return true;
+
+      // if (creature.keyword === this.state.keyword) return true;
+
+      // return false;
     });
 
     return (
@@ -44,6 +69,7 @@ export default class App extends React.Component {
                   <h2>Creature</h2>
                   <select
                     value={this.state.keyword}
+                    // onChange={this.handleKeywordChange}
                     onChange={(e) => {
                       this.setState({
                         keyword: e.target.value
@@ -57,11 +83,12 @@ export default class App extends React.Component {
                   <h2>Horns</h2>
                   <select
                     value={this.state.horns}
-                    onChange={(e) => {
-                      this.setState({
-                        horns: e.target.value
-                      })
-                    }}
+                    // onChange={(e) => {
+                    // this.setState({
+                    //   horns: Number(e.target.value)
+                    onChange={this.handleHornsChange}
+                  // })
+                  // }}
                   >
                     <option value='1'>1</option>
                     <option value='2'>2</option>
@@ -82,7 +109,7 @@ export default class App extends React.Component {
             <ImageList creatures={filteredCreatures} />
           </section>
         </section>
-      </main>
+      </main >
     )
   }
 }
