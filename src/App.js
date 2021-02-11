@@ -29,10 +29,10 @@ export default class App extends React.Component {
   render() {
     console.log(this.state)
 
-    const creatureOptions = creatures.map(
-      creature =>
-        <option key={creature.title} value={creature.keyword}>{creature.keyword}</option>
-    )
+    // const creatureOptions = creatures.map(
+    //   creature =>
+    //     <option key={creature.title} value={creature.keyword}>{creature.keyword}</option>
+    // )
 
     // const hornsOptions = creatures.map(
     //   creature =>
