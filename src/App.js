@@ -28,6 +28,7 @@ export default class App extends React.Component {
 
   render() {
     console.log(this.state)
+
     const creatureOptions = creatures.map(
       creature =>
         <option key={creature.title} value={creature.keyword}>{creature.keyword}</option>
@@ -83,13 +84,13 @@ export default class App extends React.Component {
                     //   })
                     // }}
 
-                    options={creatureOptions}
+                    options={['narwhal', 'rhino', 'unicorn', 'unilego', 'Basically a unicorn', 'narwhal', 'rhino', 'triceratops', 'narwhal', 'rhino', 'unicorn', 'markhor', 'mouflon', 'addax', 'mouflon', 'chameleon', 'chameleon', 'lizard', 'dragon']}
                   />
                 </div>
                 <div>
                   <h2>Horns</h2>
                   <Dropdown
-                    value={this.state.horns}
+                    currentValue={this.state.horns}
                     // onChange={(e) => {
                     // this.setState({
                     //   horns: Number(e.target.value)
