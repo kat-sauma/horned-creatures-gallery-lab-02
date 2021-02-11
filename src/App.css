@@ -1,6 +1,6 @@
 body {
-  height: 100;
-  width: 100;
+  height: 100vh;
+  width: 100vw;
   background-image: url("https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
   font-family: 'Architects Daughter', cursive;
   color: rgb(0, 0, 0);
@@ -9,6 +9,8 @@ body {
 }
 
 header {
+  width: 80vw;
+  margin: auto;
   font-family: 'Hanalei', cursive;
   font-size: 60px;
   text-align: center;
@@ -19,10 +21,14 @@ header {
 
 .border {
   border: solid 2px orange;
+  display: flex;
+  justify-items: center;
+  align-items: center;
   padding: 15px;
-  height: 80;
-  width: 80;
-  margin: 10;
+  height: 80%;
+  width: 90%;
+  margin: auto;
+  /* margin: 10px;  */
 }
 .colorful-backdrop {
   background-color: rgba(96, 237, 195, 0.371);
@@ -54,6 +60,14 @@ img {
   min-height: 100px;
 }
 
+ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+  padding: 0;
+}
+
+/* 
 ul{
   height: 800px;
   list-style: none;
@@ -62,17 +76,17 @@ ul{
   flex-direction: column;
   justify-content: space-evenly;
   font-size: 18px;
-}
+} */
 
 li {
   display: flex;
   flex-direction: column;
   row-gap: 5px;
   column-gap: 5px;
-  width: 20%;
+  /* width: 20%; */
   border: solid 1px black;
   align-items: center;
-  padding: 5px;
+  /* margin: 5px; */
   text-align: center;
 }
 
