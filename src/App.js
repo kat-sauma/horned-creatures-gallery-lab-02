@@ -4,6 +4,7 @@ import creatures from './data.js';
 import ImageList from './MyImageList/ImageList.js';
 import Header from './MyHeader/Header.js';
 import './index.css';
+import Dropdown from './Dropdown/Dropdown.js';
 
 export default class App extends React.Component {
   state = {
@@ -16,7 +17,7 @@ export default class App extends React.Component {
 
   handleKeywordChange = (e) => {
     this.setState({
-      creature: e.target.value
+      keyword: e.target.value
     })
   }
   handleHornsChange = (e) => {
@@ -31,6 +32,12 @@ export default class App extends React.Component {
       creature =>
         <option key={creature.title} value={creature.keyword}>{creature.keyword}</option>
     )
+
+    // const hornsOptions = creatures.map(
+    //   creature =>
+    //     <option key={creature.title} value={creature.horns}>
+    //       {creature.horns}</option>
+    // )
 
     const filteredCreatures = creatures.filter((creature) => {
       if (!this.state.keyword && !this.state.horns) return true;
@@ -67,34 +74,31 @@ export default class App extends React.Component {
               <form>
                 <div>
                   <h2>Creature</h2>
-                  <select
-                    value={this.state.keyword}
-                    // onChange={this.handleKeywordChange}
-                    onChange={(e) => {
-                      this.setState({
-                        keyword: e.target.value
-                      })
-                    }}
-                  >
-                    {creatureOptions}
-                  </select>
+                  <Dropdown
+                    currentValue={this.state.keyword}
+                    handleChange={this.handleKeywordChange}
+                    // onChange={(e) => {
+                    //   this.setState({
+                    //     keyword: e.target.value
+                    //   })
+                    // }}
+
+                    options={creatureOptions}
+                  />
                 </div>
                 <div>
                   <h2>Horns</h2>
-                  <select
+                  <Dropdown
                     value={this.state.horns}
                     // onChange={(e) => {
                     // this.setState({
                     //   horns: Number(e.target.value)
-                    onChange={this.handleHornsChange}
-                  // })
-                  // }}
-                  >
-                    <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option>
-                    <option value='100'>100</option>
-                  </select>
+                    handleChange={this.handleHornsChange}
+                    // })
+                    // }}
+
+                    options={[1, 2, 3]}
+                  />
                 </div>
               </form>
             </section>
